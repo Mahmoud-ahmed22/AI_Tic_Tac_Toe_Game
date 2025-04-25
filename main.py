@@ -67,6 +67,13 @@ def checkWhichPlayerWon(mark):
      else:
         return False
 
+def positionCheck(position):
+      if (position >= 1 and position <= 9):
+         return True
+      else:
+         return False
+
+
 def playTurn(letter, position):
 
     if isSpaceFree(position):
@@ -78,21 +85,31 @@ def playTurn(letter, position):
         if (checkWin()):
             if letter == 'X':
                 print('AI Won!')
+                exit()
                 
             else:
                 print("You Won!")
-                
+                exit()
     else:
         print("This move is already done by opponent, please try another position")
         position = int(input("Enter new position: "))
-        playTurn(letter, position)
-        return
+        while(not positionCheck(position)):
+         print("Invalid Position, please try again")
+         position = int(input("Enter Your Position For 'O': "))
+         playTurn(letter, position)
     
 player = 'O'
 bot  = 'X'
 
 def playerMove():
+   
     position = int(input("Enter Your Position For 'O': "))
+
+    while(not positionCheck(position)):
+         print("Invalid Position, please try again")
+         position = int(input("Enter Your Position For 'O': "))
+
+
     playTurn(player, position)
     return
 
